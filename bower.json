@@ -1,0 +1,14 @@
+{
+  "name": "web-dev",
+  "private": true,
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "modernizr": "~2.8.1",
+    "handlebars": "^4.0.5",
+    "pathjs": "*"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.0.2"
+  }
+}
