@@ -5,7 +5,8 @@
     "jquery": "~2.1.1",
     "modernizr": "~2.8.1",
     "handlebars": "^4.0.5",
-    "pathjs": "*"
+    "pathjs": "*",
+    "raphael": "^2.2.7"
   },
   "devDependencies": {
     "chai": "^3.5.0",
