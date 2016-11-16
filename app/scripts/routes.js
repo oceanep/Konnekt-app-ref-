@@ -33,9 +33,8 @@ $(document).ready(function(){
   }]);
 
   Path.map("#/radar").to(function(){
-  }).enter([createR, function(){
-    $("#content").load("<div id='canvas_container'></div>");
-  }]);
+    $("#navbar").after("<div id='canvas_container'></div>");
+  }).enter(createR);
 
   Path.map("#/contact").to(function(){
   }).enter([createC,function(){

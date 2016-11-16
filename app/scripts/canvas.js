@@ -14,8 +14,8 @@ $(document).ready(function(){
 
     //create cascading rings
     for (var i=0;i<9;i++){
-      multiplier = i * 5;
-      var circle = paper.circle(centerX,centerY,300 - (multiplier * 8));
+      multiplier = i * 40;
+      var circle = paper.circle(centerX,centerY,300 - multiplier);
       circle.attr({
         stroke: '#ffffff',
         'fill-opacity': 0.2,
