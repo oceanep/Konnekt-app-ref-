@@ -14,6 +14,7 @@ $(document).ready(function(){
       $("#navbar, #content").unwrap();
       $("#content").toggle();
       $("footer").toggle();
+      $("#navbar").after("<div id='canvas_container'></div>");
   }
 
 
@@ -33,7 +34,7 @@ $(document).ready(function(){
   }]);
 
   Path.map("#/radar").to(function(){
-    $("#navbar").after("<div id='canvas_container'></div>");
+    drawCanvas();
   }).enter(createR);
 
   Path.map("#/contact").to(function(){

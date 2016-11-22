@@ -1,7 +1,6 @@
-$(document).ready(function(){
+function drawCanvas(){
 
   //Create SVG graphic to display data visuaization onto
-  window.onload = function() {
     var w = $(window).width();
     var h = $(window).height();
 
@@ -14,7 +13,7 @@ $(document).ready(function(){
 
     //create cascading rings
     for (var i=0;i<9;i++){
-      multiplier = i * 40;
+      multiplier = i * 35;
       var circle = paper.circle(centerX,centerY,300 - multiplier);
       circle.attr({
         stroke: '#ffffff',
@@ -24,7 +23,6 @@ $(document).ready(function(){
     }
 
 
-  }
 
 
-});
+}
