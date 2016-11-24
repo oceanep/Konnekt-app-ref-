@@ -33,7 +33,7 @@
         <li id="logo"><a href="#/radar"><b>KNKT</b></a></li>
         <li><a href="#/home">Home</a></li>
         <li><a href="#/radar">Radar</a></li>
-        <li><a href="#/login">Login</a></li>
+        <li id="login"><a href="#/login">Login</a></li>
         <li><a href="#/contact">Contact</a></li>
         <li class="icon"><a href="#">☰</a></li>
       </ul>
@@ -50,6 +50,23 @@
     <footer>
       <p>&copy; Ocean Evers-Peete, 2016</p>
     </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.1/firebase-database.js"></script>
+
+    <script>
+      var config = {
+        apiKey: "AIzaSyDA90eJCEudkrsunhnF7Rtixp-4kBtFM-U",
+        authDomain: "konnect-49e66.firebaseapp.com",
+        databaseURL: "https://konnect-49e66.firebaseio.com",
+        storageBucket: "konnect-49e66.appspot.com",
+        messagingSenderId: "470782143"
+      };
+      firebase.initializeApp(config);
+
+      // console.log(konnekt.name);
+    </script>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
@@ -72,6 +89,7 @@
     <!-- endbuild -->
 
     <!-- build:js scripts/main.js -->
+    <!-- <script src="scripts/firebase.js"></script> -->
     <script src="scripts/main.js"></script>
     <script src="scripts/routes.js"></script>
     <script src="scripts/templates.js"></script>

@@ -5,12 +5,15 @@
       <form id="signup">
         <h1>Sign Up</h1>
         <div class="field">
+          <input id="email" placeholder="email" type="email" required>
+        </div>
+        <div class="field">
           <input id="username" placeholder="Username" type="text" required>
         </div>
         <div class="field">
-          <input class="password" placeholder="Password" type="text" required pattern="[a-zA-Z0-9]{6,}">
+          <input class="password" placeholder="Password" type="password" required pattern="[a-zA-Z0-9]{6,}">
         </div>
-        <button class="login-button" type="submit">Sign Up</button>
+        <button id="signup-button" type="submit">Sign Up</button>
         <p><a href="#/login">Log In</a></p>
       </form>
     </div>
