@@ -3,6 +3,7 @@ function toggleSignIn() {
   if (firebase.auth().currentUser) {
     //[START signout]
     firebase.auth().signOut();
+    window.location.href = "//localhost:9000/#/login";
     //[END signout]
   } else {
     var email = document.getElementById('email').value;
@@ -19,7 +20,9 @@ function toggleSignIn() {
         alert(errorMessage);
       }
       console.log(error);
+      return
     });
+
   }
 }
 
@@ -57,9 +60,11 @@ function initApp() {
 
   //shortcut to Dom Elements
   this.loginButton = document.getElementById('login-button');
+  this.loginTab = document.getElementById('login');
+  this.signoutButton = document.getElementById('signout-button');
   this.signupButton = document.getElementById('signup-button');
-  this.homeButton = document.querySelectorAll('li')[1];
-  this.radarButton = document.querySelectorAll('li')[2];
+  this.homeButton = document.querySelectorAll('li')[2];
+  this.radarButton = document.querySelectorAll('li')[3];
   this.unit = document.getElementsByClassName("hero-unit")[0];
 
   //Listen for auth state changes
@@ -67,24 +72,26 @@ function initApp() {
     if (user) {
       //show Hello Message at the top of the page
       var name = "Name";
-      window.alert('Signed in');
+      console.log('Signed in');
 
-      unit.appendChild(document.createElement('h2').appendChild(document.createTextNode('Welcome ' + name)));
-      homeButton.style.display = "inline";
-      radarButton.style.display = "inline";
+    window.location.href = "//localhost:9000/#/home";
+      //Append welcome mesage somewhere
+      // unit.appendChild(document.createElement('h2').appendChild(document.createTextNode('Welcome ' + name)));
+      loginTab.style.display = "none";
 
-      //replace login with signout
-      loginButton.innerhtml = '<a href="#/login">Sign Out</a>';
+
+      document.getElementById('signout-button').addEventListener('click', toggleSignIn, false);
     }else{
 
-      window.alert('Signed Out');
+      console.log('Signed Out');
       homeButton.style.display = "none";
       radarButton.style.display = "none";
-      loginButton.innerhtml = '<a href="#/login">Login</a>';
+      signoutButton.style.display = "none";
+
+      document.getElementById('login-button').addEventListener('click', toggleSignIn, false);
     }
   });
-  //event listeners
-  loginButton.addEventListener('click', toggleSignIn, false);
+
 }
 
 window.onload = function() {
