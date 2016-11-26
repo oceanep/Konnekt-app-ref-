@@ -21,16 +21,31 @@ $(document).ready(function(){
   Path.map("#/signup").to(function(){
   }).enter([createC,function(){
     $("#content").load("views/signup.html");
+  },function(){
+    setTimeout(function(){
+      document.getElementById('signup-button').addEventListener('click', signUp, false);
+    }, 100);
   }]);
 
   Path.map("#/login").to(function(){
+    $('login-button').onclick = function(){
+      toggleSignIn()
+    }
   }).enter([createC,function(){
     $("#content").load("views/login.html");
+  }, function(){
+    setTimeout(function(){
+      document.getElementById('login-button').addEventListener('click', toggleSignIn, false);
+    }, 100);
   }]);
 
   Path.map("#/home").to(function(){
   }).enter([createC,function(){
     $("#content").load("views/home.html");
+  },function(){
+    setTimeout(function(){
+      document.getElementById('save-contact-button').addEventListener('click', saveNewContact, false);
+    }, 100);
   }]);
 
   Path.map("#/radar").to(function(){

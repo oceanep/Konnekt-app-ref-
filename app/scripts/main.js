@@ -9,7 +9,9 @@ function toggleSignIn() {
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
 
-    firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+    firebase.auth().signInWithEmailAndPassword(email, password).then(function(){
+      window.location.href = "//localhost:9000/#/home";
+    }).catch(function(error) {
       // Handle Errors here.
       var errorCode = error.code;
       var errorMessage = error.message;
@@ -29,8 +31,15 @@ function toggleSignIn() {
 function signUp() {
   var email = document.getElementById('email').value;
   var password = document.getElementById('password').value;
+  var username = document.getElementById('username').value;
 
-  firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+  firebase.auth().createUserWithEmailAndPassword(email, password).then(function(){
+    var user = firebase.auth().currentUser;
+    user.updateProfile({
+      displayName : username
+    });
+    window.location.href = "//localhost:9000/#/home";
+  }).catch(function(error) {
     // Handle Errors here.
     var errorCode = error.code;
     var errorMessage = error.message;
@@ -44,6 +53,32 @@ function signUp() {
     // [END_EXCLUDE]
   });
   // [END createwithemail]
+}
+
+function saveNewContact() {
+  var name = document.getElementById('contact-name').value;
+  var email = document.getElementById('contact-email').value;
+  var date = document.getElementById('year-week').value;
+  var frequency = document.getElementById('frequency').value;
+  var userId = firebase.auth().currentUser.uid;
+  var userDb = firebase.database().ref('contacts/' + userId );
+
+  userDb.push({
+    name : name,
+    email : email,
+    date : date,
+    frequency : frequency,
+  });
+
+
+  //initialize database object
+  var db = firebase.database().ref().child('contacts/' + userId);
+
+  //show changes
+  db.on('value', function(snap){
+    console.log(snap.val());
+
+  });
 }
 
 function checkSetup() {
@@ -73,8 +108,6 @@ function initApp() {
       //show Hello Message at the top of the page
       var name = "Name";
       console.log('Signed in');
-
-    window.location.href = "//localhost:9000/#/home";
       //Append welcome mesage somewhere
       // unit.appendChild(document.createElement('h2').appendChild(document.createTextNode('Welcome ' + name)));
       loginTab.style.display = "none";
@@ -88,7 +121,6 @@ function initApp() {
       radarButton.style.display = "none";
       signoutButton.style.display = "none";
 
-      document.getElementById('login-button').addEventListener('click', toggleSignIn, false);
     }
   });
 
