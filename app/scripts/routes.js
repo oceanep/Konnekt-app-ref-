@@ -36,14 +36,17 @@ $(document).ready(function(){
   }, function(){
     setTimeout(function(){
       document.getElementById('login-button').addEventListener('click', toggleSignIn, false);
-    }, 100);
+    }, 200);
   }]);
 
   Path.map('#/home').to(function(){
-    window.onload = function(){
+    //set timeout so that the window finishes load, using window onload causes loadContacts not to trigger
+    //unless the page is reloaded
+    setTimeout(function(){
       document.getElementById('save-contact-button').addEventListener('click', saveNewContact, false);
       loadContacts();
-    };
+    }, 200);
+
   }).enter([createC,function(){
     $('#content').load('views/home.html');
   }]);

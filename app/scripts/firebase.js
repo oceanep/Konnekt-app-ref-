@@ -2,6 +2,7 @@ function toggleSignIn() {
   //sign in button
   if (firebase.auth().currentUser) {
     //[START signout]
+    console.log('signing out');
     firebase.auth().signOut();
     window.location.href = '//localhost:9000/#/login';
     //[END signout]
@@ -70,15 +71,7 @@ function saveNewContact() {
     frequency : frequency,
   });
 
-
-  //initialize database object
-  // var db = firebase.database().ref('contacts/' + userId);
-
-  //show changes
-  // db.on('value', function(snap){
-  //   console.log(snap.val());
-  //
-  // });
+  window.location.replace("//localhost:9000/#/home");
 }
 
 function checkSetup() {
@@ -111,9 +104,7 @@ function initApp() {
       //Append welcome mesage somewhere
       // unit.appendChild(document.createElement('h2').appendChild(document.createTextNode('Welcome ' + name)));
       loginTab.style.display = 'none';
-
-
-      document.getElementById('signout-button').addEventListener('click', toggleSignIn, false);
+      signoutButton.addEventListener('click', toggleSignIn, false);
     }else{
 
       console.log('Signed Out');
