@@ -1,14 +1,17 @@
 // bower:scss
 // endbower
 @import 'nav';
-@import 'login';
+@import 'module';
 @import 'canvas';
+@import 'specifics';
 
 body {
   background: #fafafa;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #333;
   margin: 0;
+  display: flex;
+  flex-direction: column;
 }
 a {
   text-decoration: none;
@@ -19,9 +22,11 @@ footer {
   font-size: 10px;
   color: #f2f2f2;
   height: 30px;
+  width: 100%;
 }
 
 .wrapper {
+  flex: 1;
   min-height: calc(100vh - 30px);
 }
 

@@ -66,18 +66,18 @@
       };
       firebase.initializeApp(config);
 
-
-      //initialize database object
-      var dbRef = firebase.database().ref().child('users');
-
-      //save changes
-      dbRef.on('value', function(snap){
-        console.log(snap.val());
-
-      //display user info
-      var user = firebase.auth().currentUser;
-      console.log(user.displayName, user.uid);
-      });
+      // 
+      // //initialize database object
+      // var dbRef = firebase.database().ref().child('contacts');
+      //
+      // //save changes
+      // dbRef.on('value', function(snap){
+      //   console.log(snap.val());
+      //
+      // //display user info
+      // var user = firebase.auth().currentUser;
+      // console.log(user.displayName, user.uid);
+      // });
     </script>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
@@ -101,7 +101,7 @@
     <!-- endbuild -->
 
     <!-- build:js scripts/main.js -->
-    <!-- <script src="scripts/firebase.js"></script> -->
+    <script src="scripts/firebase.js"></script>
     <script src="scripts/main.js"></script>
     <script src="scripts/routes.js"></script>
     <script src="scripts/templates.js"></script>

@@ -20,6 +20,10 @@ ul.nav {
       -webkit-transition: 0.3s;
       transition: 0.3s;
       font-size: 17px;
+      transition:
+        background 1s;
+      -webkit-transition:
+        background 1s;
       &:hover {background-color: #555;}
     }
     &#logo {
@@ -52,7 +56,7 @@ ul.nav {
       display: inline-block;
        }
     &:hover {
-      position: relative;
+      position: fixed;
       li {
         float: none;
         display: inline;

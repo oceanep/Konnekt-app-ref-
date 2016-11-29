@@ -1,0 +1,31 @@
+.hero-unit{
+  width: 300px;
+  background-color: #eee;
+  border-radius: 6px;
+  margin-top: 25%;
+}
+.box{
+  width: 40%;
+  float: left;
+  background-color: #eee;
+  padding-top: 10%;
+  min-height: 85vh;
+  &:first-of-type{
+    background-color: #808182;
+  }
+}
+.contact{
+  background-color: #808182;
+  border-radius: 20px;
+  color: white;
+  transition:
+    color 1s,
+    background 1s .25s;
+  -webkit-transition:
+    color 1s,
+    background 1s .25s;
+  &:hover{
+    background-color: white;
+    color: #808182;
+  }
+}
