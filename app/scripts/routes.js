@@ -46,13 +46,12 @@ $(document).ready(function(){
       document.getElementById('save-contact-button').addEventListener('click', saveNewContact, false);
       loadContacts();
     }, 200);
-
   }).enter([createC,function(){
     $('#content').load('views/home.html');
   }]);
 
   Path.map('#/radar').to(function(){
-    drawCanvas();
+    setTimeout(function(){drawCanvas();}, 200);
   }).enter(createR);
 
   Path.map('#/contact').to(function(){

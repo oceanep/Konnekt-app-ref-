@@ -12,6 +12,7 @@ function loadContacts(){
   //set contact data
   var setContact = function(data){
     var val = data.val();
+    console.log(data.val());
     displayContacts(data.key,val.name);
 
   }
@@ -36,17 +37,11 @@ function displayContacts(key,name,email,date,frequency){
     a.textContent = name;
     a.setAttribute('href','#popUp');
     a.setAttribute('id',key);
-    a.className += "contact_link";
-    a.addEventListener("click",function(){expandContact(key);},false);
+    a.className += 'contact_link';
+    a.addEventListener('click',function(){expandContact(key);},false);
     div.appendChild(a);
     contacts_list.appendChild(div);
   }
-}
-
-function deleteContact(ref){
-  console.log('deleting contact...');
-  ref.remove();
-
 }
 
 function expandContact(key){
@@ -55,11 +50,11 @@ function expandContact(key){
   var deleteRef = firebase.database().ref('users/' + userId + '/contacts/' + key);
   var deleteButton = document.getElementById('deleteContact');
     console.log(key,userId);
-  deleteButton.removeEventListener("click",function(){deleteRef.set(null);});
-  deleteButton.addEventListener("click",function(){deleteRef.remove();},false);
+  deleteButton.removeEventListener('click',function(){deleteRef.set(null);});
+  deleteButton.addEventListener('click',function(){deleteRef.remove();},false);
 
 
-  var popup = document.getElementById("contact_data");
+  var popup = document.getElementById('contact_data');
   var p1 = document.createElement('p');
   var p2 = document.createElement('p');
   var p3 = document.createElement('p');

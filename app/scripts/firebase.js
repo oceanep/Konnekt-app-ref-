@@ -71,7 +71,7 @@ function saveNewContact() {
     frequency : frequency,
   });
 
-  window.location.replace("//localhost:9000/#/home");
+  window.location.replace('//localhost:9000/#/home');
 }
 
 function checkSetup() {
