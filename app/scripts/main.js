@@ -1,5 +1,6 @@
 window.onload = function() {
   initApp();
+ 
 };
 
 function loadContacts(){
@@ -12,7 +13,6 @@ function loadContacts(){
   //set contact data
   var setContact = function(data){
     var val = data.val();
-    console.log(data.val());
     displayContacts(data.key,val.name);
 
   }
@@ -45,16 +45,20 @@ function displayContacts(key,name,email,date,frequency){
 }
 
 function expandContact(key){
+
   //set deleteButton event handler
   var userId = firebase.auth().currentUser.uid;
   var deleteRef = firebase.database().ref('users/' + userId + '/contacts/' + key);
+  //create delete function
+  var deleteContact = function(){
+    deleteRef.remove();
+  };
   var deleteButton = document.getElementById('deleteContact');
-    console.log(key,userId);
-  deleteButton.removeEventListener('click',function(){deleteRef.set(null);});
-  deleteButton.addEventListener('click',function(){deleteRef.remove();},false);
+  deleteButton.removeEventListener('click',deleteContact);
+  deleteButton.addEventListener('click',deleteContact);
 
 
-  var popup = document.getElementById('contact_data');
+  var popup = document.getElementsByClassName('contact_data')[0];
   var p1 = document.createElement('p');
   var p2 = document.createElement('p');
   var p3 = document.createElement('p');
@@ -63,12 +67,11 @@ function expandContact(key){
 
   contactRef.off();
   contactRef.on('value',function(data){
-    console.log(data.val());
     var contact = data.val();
-    p1.textContent = contact.name;
-    p2.textContent = contact.email;
-    p3.textContent = contact.date;
-    p4.textContent = contact.frequency;
+    p1.textContent = "Name: " + contact.name;
+    p2.textContent = "Email: " + contact.email;
+    p3.textContent = "Week of Meeting: " + contact.date;
+    p4.textContent = "Contact Cycle: " + contact.frequency;
   });
 
   popup.appendChild(p1);

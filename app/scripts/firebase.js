@@ -57,21 +57,25 @@ function signUp() {
 }
 
 function saveNewContact() {
-  var name = document.getElementById('contact-name').value;
-  var email = document.getElementById('contact-email').value;
-  var date = document.getElementById('year-week').value;
-  var frequency = document.getElementById('frequency').value;
+  var name = document.getElementById('contact-name');
+  var email = document.getElementById('contact-email');
+  var date = document.getElementById('year-week');
+  var frequency = document.getElementById('frequency');
   var userId = firebase.auth().currentUser.uid;
   var userDb = firebase.database().ref('users/' + userId + '/contacts/');
 
   userDb.push({
-    name : name,
-    email : email,
-    date : date,
-    frequency : frequency,
+    name : name.value,
+    email : email.value,
+    date : date.value,
+    frequency : frequency.value,
   });
 
-  window.location.replace('//localhost:9000/#/home');
+  name.value = "";
+  email.value = "";
+  date.value = "";
+  frequency.value = "";
+
 }
 
 function checkSetup() {
@@ -101,6 +105,11 @@ function initApp() {
       //show Hello Message at the top of the page
       var name = 'Name';
       console.log('Signed in');
+
+      //display buttons
+      homeButton.style.display = 'inline-block';
+      radarButton.style.display = 'inline-block';
+      signoutButton.style.display = 'inline-block';
       //Append welcome mesage somewhere
       // unit.appendChild(document.createElement('h2').appendChild(document.createTextNode('Welcome ' + name)));
       loginTab.style.display = 'none';
@@ -108,6 +117,8 @@ function initApp() {
     }else{
 
       console.log('Signed Out');
+      //hide buttons
+      loginTab.style.display = 'inline-block';
       homeButton.style.display = 'none';
       radarButton.style.display = 'none';
       signoutButton.style.display = 'none';
