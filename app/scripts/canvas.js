@@ -15,7 +15,7 @@ function drawCanvas(){
 
     //create cascading rings
     for (var i=0;i<7;i++){
-      multiplier = i * 50;
+      var multiplier = i * 50;
       var circle = paper.circle(centerX,centerY,325 - multiplier);
       circle.attr({
         stroke: '#ffffff',
@@ -41,16 +41,18 @@ function drawContactCircles(paper, contacts, centerX, centerY, inc) {
   //add get week functionality to date object
   Date.prototype.getWeek = function() {
       var base = new Date(this.getFullYear(), 0, 1);
-      return Math.ceil((((this - base) / 86400000) + base.getDay() + 1) / 7);
+      return Math.ceil((((this - base) / 86400000) + base.getDay() + 1) / 7) - 1;
   };
 
 
 
   var points;
-  var radius;
+  var r = 0;
+  var mult;
   //get week of year
   var now = new Date();
   var weekNumber = now.getWeek();
+  console.log(weekNumber);
   //store all circle objects for a dow so they can be changed all at once
   var contactSet = paper.set();
   //size/radius of circle
@@ -61,13 +63,14 @@ function drawContactCircles(paper, contacts, centerX, centerY, inc) {
 
     //handle grammar for different week amounts
     function phrase(weeks){
-      if(weeks != 1 && weeks < 6){return 'weeks';}
-      if(weeks === 1){return 'week';}
-      if(weeks >= 6){return 'weeks\n or more';}
+      if(weeks < 1){return 'this week';}
+      if(weeks == 1){return 'next week';}
+      if(weeks != 1 && weeks < 6){return weeks+' weeks';}
+      if(weeks >= 6){return weeks + ' weeks\n or more';}
     };
 
     paper.setStart();
-    var theLabel = paper.text(shape.attr('cx')+ shape.attr('r')*6, shape.attr('cy'), ' ' + label + '\n' + email + '\n' + weeks +' ' + phrase(weeks)).attr({
+    var theLabel = paper.text(shape.attr('cx')+ shape.attr('r')*6, shape.attr('cy'), ' ' + label + '\n' + email + '\n' + phrase(weeks)).attr({
       'font-size': 13, 'fill': '#ffffff', 'font-family': 'Lato, sans-serif'
     });
     theLabel.node.setAttribute('class', 'task-text');
@@ -98,12 +101,14 @@ function drawContactCircles(paper, contacts, centerX, centerY, inc) {
     var dateMet = contacts[contact].date;
     var frequency = contacts[contact].frequency;
     //calculate multiplier for radius
-    multiplier = (Math.abs(weekNumber - dateMet) % frequency) + 1;
-    if(multiplier > 7){multiplier = 6;}
-    radius = multiplier * 50;
+    mult = multiplier(Math.abs(weekNumber - dateMet),frequency);
+    if(mult > 5){mult = 5;}
+    r = (+mult + 1) * 50;
+    console.log(contacts[contact].name, ' mult: ' + mult + ' radius: '+r);
+
     //get point on ring and increment so they aren't in a line
-    points = getPoint(inc, radius, centerX, centerY);
-    inc+=0.2;
+    points = getPoint(inc, r, centerX, centerY);
+    inc+=0.13;
     //get x & y coordinates
     var x = points.x;
     var y = points.y;
@@ -113,11 +118,20 @@ function drawContactCircles(paper, contacts, centerX, centerY, inc) {
     circ.data('title', contacts[contact].name);
     circ.data('email',contacts[contact].email);
     circ.data('weeks', contacts[contact].date);
-    circ = setContactInfo(circ, circ.data('title'), circ.data('email'), multiplier); //add label
+    circ = setContactInfo(circ, circ.data('title'), circ.data('email'), mult); //add label
     contactSet.push(circ);
   };
   contactSet.attr({fill: '#ffffff', stroke: '#00BCD1', 'stroke-width': 8 });
 
+
+  //calculate the multiplier
+  function multiplier(diff,freq){
+    console.log('diff: ' +diff+ ' freq: '+freq );
+    if(diff < 1){return freq;}
+    if((diff % freq) === 0){return 0;}
+    this.diff = diff%freq;
+    return freq - this.diff;
+  }
   // get an incremental point around a circle given its center and radius */
   function getPoint(inc, radius, centerX, centerY) {
     var angle = inc * Math.PI * 2;

@@ -44,6 +44,7 @@ function signUp() {
       displayName : username
     });
     window.location.hash = "#/home";
+    window.location.reload();
   }).catch(function(error) {
     // Handle Errors here.
     var errorCode = error.code;
