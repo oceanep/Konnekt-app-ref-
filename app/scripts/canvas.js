@@ -61,16 +61,16 @@ function drawContactCircles(paper, contacts, centerX, centerY, inc) {
 
     //handle grammar for different week amounts
     function phrase(weeks){
-      if(weeks != 1 && weeks < 6){return "weeks";}
-      if(weeks === 1){return "week";}
-      if(weeks >= 6){return "weeks\n or more";}
+      if(weeks != 1 && weeks < 6){return 'weeks';}
+      if(weeks === 1){return 'week';}
+      if(weeks >= 6){return 'weeks\n or more';}
     };
 
     paper.setStart();
-    var theLabel = paper.text(shape.attr("cx")+ shape.attr('r')*6, shape.attr("cy"), " " + label + "\n" + email + "\n" + weeks +" " + phrase(weeks)).attr({
+    var theLabel = paper.text(shape.attr('cx')+ shape.attr('r')*6, shape.attr('cy'), ' ' + label + '\n' + email + '\n' + weeks +' ' + phrase(weeks)).attr({
       'font-size': 13, 'fill': '#ffffff', 'font-family': 'Lato, sans-serif'
     });
-    theLabel.node.setAttribute('class', "task-text");
+    theLabel.node.setAttribute('class', 'task-text');
     var box = theLabel.getBBox();
     var width = box.width;
     var info = paper.circle(box.x + (width/2), box.y + (width/3.8), width/1.8).attr({'fill':'rgba(116, 119, 124,0.5)', 'stroke-opacity':'0'});
@@ -78,17 +78,17 @@ function drawContactCircles(paper, contacts, centerX, centerY, inc) {
     theLabel.toFront();
     var sf = paper.setFinish();
 
-    shape.data("label", sf);
+    shape.data('label', sf);
 
     var hoverIn = function() {
-      this.animate({"fill-opacity": 0.9, fill: "#00BCD1", stroke: "#fff", "stroke-width": 20, "stroke-opacity": 0.7 }, 1000);
-      this.data("label").show();
+      this.animate({'fill-opacity': 0.9, fill: '#00BCD1', stroke: '#fff', 'stroke-width': 20, 'stroke-opacity': 0.7 }, 1000);
+      this.data('label').show();
     };
     var hoverOut = function() {
-      this.animate({"fill-opacity": 1, fill: "#fff", stroke: "#00BCD1", "stroke-width": size*1.1, "stroke-opacity": 1 }, 1000);
-      this.data("label").hide();
+      this.animate({'fill-opacity': 1, fill: '#fff', stroke: '#00BCD1', 'stroke-width': size*1.1, 'stroke-opacity': 1 }, 1000);
+      this.data('label').hide();
     };
-    shape.data("label").hide();
+    shape.data('label').hide();
     shape.hover(hoverIn, hoverOut, shape, shape);
     return shape;
   };
@@ -110,13 +110,13 @@ function drawContactCircles(paper, contacts, centerX, centerY, inc) {
     size = 12;
     var circ = paper.circle(x, y, size)
     //set contact details to pop up circle
-    circ.data("title", contacts[contact].name);
-    circ.data("email",contacts[contact].email);
-    circ.data("weeks", contacts[contact].date);
+    circ.data('title', contacts[contact].name);
+    circ.data('email',contacts[contact].email);
+    circ.data('weeks', contacts[contact].date);
     circ = setContactInfo(circ, circ.data('title'), circ.data('email'), multiplier); //add label
     contactSet.push(circ);
   };
-  contactSet.attr({fill: "#ffffff", stroke: "#00BCD1", "stroke-width": 8 });
+  contactSet.attr({fill: '#ffffff', stroke: '#00BCD1', 'stroke-width': 8 });
 
   // get an incremental point around a circle given its center and radius */
   function getPoint(inc, radius, centerX, centerY) {

@@ -4,14 +4,18 @@ function toggleSignIn() {
     //[START signout]
     console.log('signing out');
     firebase.auth().signOut();
-    window.location.href = '//localhost:9000/#/login';
+    window.location.hash = "#/login";
+    //weird timing stuff makes the display settngs of the nav freak out if you dont reload on login/out
+    window.location.reload();
     //[END signout]
   } else {
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
 
     firebase.auth().signInWithEmailAndPassword(email, password).then(function(){
-      window.location.href = '//localhost:9000/#/home';
+      //weird timing stuff makes the display settngs of the nav freak out if you dont reload on login/out
+      window.location.hash = "#/home";
+      window.location.reload()
     }).catch(function(error) {
       // Handle Errors here.
       var errorCode = error.code;
@@ -39,7 +43,7 @@ function signUp() {
     user.updateProfile({
       displayName : username
     });
-    window.location.href = '//localhost:9000/#/home';
+    window.location.hash = "#/home";
   }).catch(function(error) {
     // Handle Errors here.
     var errorCode = error.code;
@@ -71,10 +75,10 @@ function saveNewContact() {
     frequency : frequency.value,
   });
 
-  name.value = "";
-  email.value = "";
-  date.value = "";
-  frequency.value = "";
+  name.value = '';
+  email.value = '';
+  date.value = '';
+  frequency.value = '';
 
 }
 
@@ -95,8 +99,8 @@ function initApp() {
   this.loginTab = document.getElementById('login');
   this.signoutButton = document.getElementById('signout-button');
   this.signupButton = document.getElementById('signup-button');
-  this.homeButton = document.querySelectorAll('li')[2];
-  this.radarButton = document.querySelectorAll('li')[3];
+  this.homeButton = document.querySelectorAll('li')[3];
+  this.radarButton = document.querySelectorAll('li')[4];
   this.unit = document.getElementsByClassName('hero-unit')[0];
 
   //Listen for auth state changes
@@ -107,9 +111,9 @@ function initApp() {
       console.log('Signed in');
 
       //display buttons
-      homeButton.style.display = 'inline-block';
-      radarButton.style.display = 'inline-block';
-      signoutButton.style.display = 'inline-block';
+      // homeButton.style.display = 'inline-block';
+      // radarButton.style.display = 'inline-block';
+      // signoutButton.style.display = 'inline-block';
       //Append welcome mesage somewhere
       // unit.appendChild(document.createElement('h2').appendChild(document.createTextNode('Welcome ' + name)));
       loginTab.style.display = 'none';
@@ -118,7 +122,7 @@ function initApp() {
 
       console.log('Signed Out');
       //hide buttons
-      loginTab.style.display = 'inline-block';
+      // loginTab.style.display = 'inline-block';
       homeButton.style.display = 'none';
       radarButton.style.display = 'none';
       signoutButton.style.display = 'none';

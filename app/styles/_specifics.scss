@@ -1,5 +1,6 @@
 .hero-unit{
-  width: 300px;
+  width: calc(100vw * .5);
+  max-width: 300px;
   background-color: #eee;
   border-radius: 6px;
   margin-top: 150px;
@@ -14,17 +15,76 @@
     background-color: #808182;
   }
 }
+.about{
+  width: calc(100vw * .8);
+  background-color: #eee;
+  border-radius: 6px;
+  h3{
+    margin: 0 auto;
+  }
+  h4{
+    margin: 0 auto;
+    color: rgb(123,123,123);
+  }
+  ul{
+    margin-left: -2em;
+  }
+  li{
+    list-style-type: none;
+    font-weight: bold;
+    font-size: .7em;
+    color: rgba(0,0,0,.5);
+  }
+}
+#logo_filler{
+  display: block;
+  margin: 0 auto;
+  width: 200px;
+  height: calc(10vh + 200px);
+}
+.logo_ring{
+  opacity: 0.4;
+  background-color: #00BCD1;
+  margin: 0 auto;
+  position: fixed;
+  border-radius: 50%;
+  &.ring_1{
+    top: 10vh;
+    left: calc(50vw - 100px);
+    width: 200px;
+    height: 200px;
+  }
+  &.ring_2{
+    top: calc(10vh + 37px);
+    left: calc(50vw - 63px);
+    width: 125px;
+    height: 125px;
+  }
+  &.ring_3{
+    top: calc(10vh + 75px);
+    left: calc(50vw - 25px);
+    width: 50px;
+    height: 50px;
+  }
+}
+#logo_title{
+  position: fixed;
+  font-size: 1em;
+  color: rgba(105, 108, 112,.8);
+  top: calc(10vh + 3.5em);
+  left: calc(50vw - 3.88em);
+}
 .contact{
   background-color: #808182;
   border-radius: 20px;
   color: white;
   margin-top: 8%;
   transition:
-    color 1s,
-    background 1s .25s;
+    color .5s,
+    background .5s .25s;
   -webkit-transition:
-    color 1s,
-    background 1s .25s;
+    color .5s,
+    background .5s .25s;
 
   a.contact_link {
     text-align: center;
@@ -60,7 +120,7 @@
 
   transition: opacity 0.35s ease;
   -webkit-transition: opacity 0.35s ease;
-  
+
   & .popUpContainer{
     width: 100%;
     max-width: 500px;

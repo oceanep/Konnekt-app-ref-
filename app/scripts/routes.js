@@ -20,13 +20,13 @@ $(document).ready(function(){
   }
 
   function loadScreen(){
-    loader.classList.remove("loaded");
+    loader.classList.remove('loaded');
     loader.style.display = 'block';
     setTimeout(function(){
       console.log('loading...');
       loader.classList.add('loaded');
       setTimeout(function(){
-        loader.style.display ="none";
+        loader.style.display ='none';
       }, 1000);
     }, 500);
 
@@ -69,9 +69,9 @@ $(document).ready(function(){
     setTimeout(function(){drawCanvas();}, 200);
   }).enter([createR,loadScreen]);
 
-  Path.map('#/contact').to(function(){
+  Path.map('#/about').to(function(){
   }).enter([createC,function(){
-    $('#content').load('views/contact.html');
+    $('#content').load('views/about.html');
   },loadScreen]);
 
   Path.root('#/login');

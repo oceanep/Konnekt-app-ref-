@@ -1,8 +1,11 @@
+'use strict';
+
 window.onload = function() {
   initApp();
- 
+
 };
 
+//get contacts
 function loadContacts(){
   //fetch contact objects from database
   var userId = firebase.auth().currentUser.uid;
@@ -25,7 +28,8 @@ function loadContacts(){
 
 }
 
-function displayContacts(key,name,email,date,frequency){
+//create tabs for contacts
+function displayContacts(key,name){
   var div = document.getElementById(key);
   var contacts_list = document.getElementById('contacts_list');
   //if element does not exist create it
@@ -44,18 +48,26 @@ function displayContacts(key,name,email,date,frequency){
   }
 }
 
+//create delete function
+function deleteContact(deleteRef,key){
+  deleteRef.remove();
+  var div = document.getElementById(key);
+  div.parentNode.removeChild(div);
+};
+
+//populate modal with contact data
 function expandContact(key){
 
   //set deleteButton event handler
   var userId = firebase.auth().currentUser.uid;
-  var deleteRef = firebase.database().ref('users/' + userId + '/contacts/' + key);
-  //create delete function
-  var deleteContact = function(){
-    deleteRef.remove();
-  };
+  var contactRef = firebase.database().ref('users/' + userId + '/contacts/' + key);
   var deleteButton = document.getElementById('deleteContact');
-  deleteButton.removeEventListener('click',deleteContact);
-  deleteButton.addEventListener('click',deleteContact);
+  deleteButton.removeEventListener('click',function(){
+    deleteContact(contactRef,key);
+  });
+  deleteButton.addEventListener('click',function(){
+    deleteContact(contactRef,key);
+  }, false);
 
 
   var popup = document.getElementsByClassName('contact_data')[0];
@@ -63,15 +75,17 @@ function expandContact(key){
   var p2 = document.createElement('p');
   var p3 = document.createElement('p');
   var p4 = document.createElement('p');
-  var contactRef = firebase.database().ref('users/' + userId + '/contacts/' + key);
 
   contactRef.off();
   contactRef.on('value',function(data){
     var contact = data.val();
-    p1.textContent = "Name: " + contact.name;
-    p2.textContent = "Email: " + contact.email;
-    p3.textContent = "Week of Meeting: " + contact.date;
-    p4.textContent = "Contact Cycle: " + contact.frequency;
+    if(contact){
+      p1.textContent = 'Name: ' + contact.name;
+      p2.textContent = 'Email: ' + contact.email;
+      p3.textContent = 'Week of Meeting: ' + contact.date;
+      p4.textContent = 'Contact Cycle: ' + contact.frequency;
+    }
+
   });
 
   popup.appendChild(p1);
