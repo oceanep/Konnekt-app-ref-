@@ -39,7 +39,7 @@ $(document).ready(function(){
   },function(){
     setTimeout(function(){
       document.getElementById('signup-button').addEventListener('click', signUp, false);
-    }, 100);
+    }, 500);
   },loadScreen]);
 
   Path.map('#/login').to(function(){
@@ -51,7 +51,7 @@ $(document).ready(function(){
   }, function(){
     setTimeout(function(){
       document.getElementById('login-button').addEventListener('click', toggleSignIn, false);
-    }, 200);
+    }, 500);
   },loadScreen]);
 
   Path.map('#/home').to(function(){
@@ -60,7 +60,7 @@ $(document).ready(function(){
     setTimeout(function(){
       document.getElementById('save-contact-button').addEventListener('click', saveNewContact, false);
       loadContacts();
-    }, 200);
+    }, 500);
   }).enter([createC,function(){
     $('#content').load('views/home.html');
   },loadScreen]);

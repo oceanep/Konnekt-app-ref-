@@ -53,7 +53,7 @@ function deleteContact(deleteRef,key){
   deleteRef.remove();
   var div = document.getElementById(key);
   div.parentNode.removeChild(div);
-};
+}
 
 //populate modal with contact data
 function expandContact(key){

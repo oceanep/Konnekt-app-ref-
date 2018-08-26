@@ -73,10 +73,10 @@ function drawContactCircles(paper, contacts, centerX, centerY, inc) {
     var theLabel = paper.text(shape.attr('cx')+ shape.attr('r')*6, shape.attr('cy'), ' ' + label + '\n' + email + '\n' + phrase(weeks)).attr({
       'font-size': 13, 'fill': '#ffffff', 'font-family': 'Lato, sans-serif'
     });
-    theLabel.node.setAttribute('class', 'task-text');
+    theLabel.node.setAttribute('class', 'contact-text');
     var box = theLabel.getBBox();
     var width = box.width;
-    var info = paper.circle(box.x + (width/2), box.y + (width/3.8), width/1.8).attr({'fill':'rgba(116, 119, 124,0.5)', 'stroke-opacity':'0'});
+    var info = paper.circle(box.x + (width/2), box.y + (width/3.8), width/1.8).attr({'fill':'rgba(116, 119, 124,0.25)', 'stroke-opacity':'0'});
     info.node.setAttribute('class', 'text-box');
     theLabel.toFront();
     var sf = paper.setFinish();
@@ -86,6 +86,7 @@ function drawContactCircles(paper, contacts, centerX, centerY, inc) {
     var hoverIn = function() {
       this.animate({'fill-opacity': 0.9, fill: '#00BCD1', stroke: '#fff', 'stroke-width': 20, 'stroke-opacity': 0.7 }, 1000);
       this.data('label').show();
+      this.data('label').toFront();
     };
     var hoverOut = function() {
       this.animate({'fill-opacity': 1, fill: '#fff', stroke: '#00BCD1', 'stroke-width': size*1.1, 'stroke-opacity': 1 }, 1000);
@@ -138,7 +139,7 @@ function drawContactCircles(paper, contacts, centerX, centerY, inc) {
       return {
           x: centerX + radius * Math.cos(angle),
           y: centerY + radius * Math.sin(angle)
-  };
+        };
 
   }
 }

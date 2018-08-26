@@ -4,7 +4,7 @@ function toggleSignIn() {
     //[START signout]
     console.log('signing out');
     firebase.auth().signOut();
-    window.location.hash = "#/login";
+    window.location.hash = '#/login';
     //weird timing stuff makes the display settngs of the nav freak out if you dont reload on login/out
     window.location.reload();
     //[END signout]
@@ -14,7 +14,7 @@ function toggleSignIn() {
 
     firebase.auth().signInWithEmailAndPassword(email, password).then(function(){
       //weird timing stuff makes the display settngs of the nav freak out if you dont reload on login/out
-      window.location.hash = "#/home";
+      window.location.hash = '#/home';
       window.location.reload()
     }).catch(function(error) {
       // Handle Errors here.
@@ -43,7 +43,7 @@ function signUp() {
     user.updateProfile({
       displayName : username
     });
-    window.location.hash = "#/home";
+    window.location.hash = '#/home';
     window.location.reload();
   }).catch(function(error) {
     // Handle Errors here.
